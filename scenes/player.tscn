@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://bkynle2jgjpby"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_le0bm"]
+albedo_color = Color(0, 0.8, 0.94902, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_as3b3"]
+material = SubResource("StandardMaterial3D_le0bm")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l2keu"]
+albedo_color = Color(1, 0.490196, 0.14902, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4vuuw"]
+material = SubResource("StandardMaterial3D_l2keu")
+size = Vector3(0.25, 0.25, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jwcoa"]
+
+[node name="Player" type="CharacterBody3D"]
+
+[node name="Pivot" type="Marker3D" parent="."]
+
+[node name="Skin" type="MeshInstance3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_as3b3")
+skeleton = NodePath("../..")
+
+[node name="Facing" type="MeshInstance3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -0.5)
+mesh = SubResource("BoxMesh_4vuuw")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_jwcoa")
